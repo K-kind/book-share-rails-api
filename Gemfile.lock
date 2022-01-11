@@ -116,6 +116,9 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
+    pluginator (1.5.0)
+    pre-commit (0.39.0)
+      pluginator (~> 1.5)
     puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -184,6 +187,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  pre-commit
   puma (~> 5.0)
   rails (~> 7.0.1)
   rubocop
