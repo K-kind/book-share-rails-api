@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include JWT
+
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -7,4 +9,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
   validates :description, length: { maximum: 255 }
+
+  def create_auth_token
+    create_jwt({ user_id: id })
+  end
 end
