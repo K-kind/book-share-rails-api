@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  include JWT
-
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -11,6 +9,9 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 255 }
 
   def create_auth_token
-    create_jwt({ user_id: id })
+    exp = (Time.zone.now + 30.days).to_i
+    payload = { user_id: id, exp: exp }
+    secret = ENV.fetch('JWT_SECRET')
+    JWT.encode(payload, secret, 'HS256')
   end
 end
