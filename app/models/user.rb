@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
   validates :description, length: { maximum: 255 }
 
   def create_auth_token
